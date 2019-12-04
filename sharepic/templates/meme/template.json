@@ -8,6 +8,12 @@
       "height": 1200,
       "src": "sharepic/templates/meme/1200x1200.svg",
       "alias": "Facebook, Instagram"
+    },
+    {
+      "width": 1200,
+      "height": 1200,
+      "src": "sharepic/templates/meme/1200x1200-other.svg",
+      "alias": "Other"
     }
   ],
   "fonts": [
@@ -42,9 +48,7 @@
       "type": "selection",
       "description": "Background",
       "key": "backgroundImage",
-      "default": {
-        "value": "sharepic/templates/meme/disastergirl.png"
-      },
+      "default": "sharepic/templates/meme/disastergirl.png",
       "properties": {
         "items": [
           {
@@ -73,6 +77,11 @@
             "render": "data:image/jpeg;base64,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"
           },
           {
+            "type": "value",
+            "value": "sharepic/templates/meme/felix.jpeg",
+            "render": "data:image/jpeg;base64,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"
+          },
+          {
             "type": "file"
           }
         ]
@@ -93,6 +102,34 @@
       "default": "www.fffulm.de   #fridaysforfuture",
       "properties": {
 
+      }
+    },
+    {
+      "type": "selection",
+      "description": "Logo",
+      "key": "logo",
+      "properties": {
+        "items": [
+          {
+            "type": "value",
+            "value": "sharepic/resources/logo-ulm.svg"
+          },
+          {
+            "type": "value",
+            "value": "sharepic/resources/logo.svg"
+          },
+          {
+            "type": "value",
+            "value": "sharepic/resources/logo-2.svg"
+          },
+          {
+            "type": "value",
+            "value": "sharepic/resources/logo-3.svg"
+          },
+          {
+            "type": "file"
+          }
+        ]
       }
     }
   ]

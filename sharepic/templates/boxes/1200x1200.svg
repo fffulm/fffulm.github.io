@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="100%" height="100%"
+     viewBox="0 0 1200 1200"
+     version="1.1">
+
+
+
+  <g class="main">
+
+    <filter id="dropshadow" height="130%">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="4"/> <!-- stdDeviation is how much to blur -->
+        <feOffset dx="0" dy="0" result="offsetblur"/> <!-- how much to offset -->
+        <feComponentTransfer>
+          <feFuncA type="linear" slope="0.6"/> <!-- slope is the opacity of the shadow -->
+        </feComponentTransfer>
+        <feMerge>
+          <feMergeNode/> <!-- this contains the offset blurred image -->
+          <feMergeNode in="SourceGraphic"/> <!-- this contains the element that the filter is applied to -->
+        </feMerge>
+      </filter>
+
+
+    <image v-bind:xlink:href="backgroundImage.value" v-fitimage v-bind:data-image-pos="pos" style="transform-origin: 50% 50%;" />
+        <g v-if="options[0]">
+      <rect x="0" y="70" height="100" v-bind:width="30 + textInfo(title, { fontFamily: 'Jost', fontSize: '80px'}).width" fill="#EE434C"/>
+      <text x="10" y="90" alignment-baseline="hanging" style="fill: #fff; font-size: 80px; font-family: 'Jost', 'Helvetica Neue';" filter="url(#dropshadow)">{{title}}</text>
+        </g>
+      <g v-if="options[1]">
+      <rect x="-50" y="570" width="600" height="160" v-bind:fill="tagcolor" style="transform-origin: 300px 600px; transform: rotate(-10deg);"/>
+      <text x="15" y="590" fill="#000" alignment-baseline="hanging" style="transform-origin: 300px 600px; transform: rotate(-10deg); font-size: 150px; font-family: 'Jost-900', 'Helvetica Neue';">{{date}}</text>
+          </g>
+      <g v-for="n in text.length">
+        <rect v-bind:x="n%2 ? 500 : 520" v-bind:y="500-50*text.length+n*100" v-bind:width="40+textInfo(text[n-1], { fontFamily: 'Jost', fontSize: '100px'}).width" height="120" v-bind:fill="n%2 ? '#1B7340' : '#1DA64A'" filter="url(#dropshadow)"/>
+        <text v-bind:x="n%2 ? 520 : 540" v-bind:y="520-50*text.length+n*100" alignment-baseline="hanging" style="fill: #fff; font-size: 100px; font-family: 'Jost', 'Helvetica Neue';" filter="url(#dropshadow)">{{text[n-1]}}</text>
+      </g>
+
+
+    <rect x="0" v-bind:y="1035" width="100%" height="100" style="fill: #1B7340;"/>
+      <text x="20" y="1055" alignment-baseline="hanging" style="fill: #fff; font-size: 80px; font-family: 'Jost', 'Helvetica Neue';" filter="url(#dropshadow)">{{subtitle}}</text>
+
+
+    <image v-bind:xlink:href="typeof logo == 'object' ? logo.value : logo" x="995" y="995" height="180" width="180" filter="url(#dropshadow)" />
+
+  </g>
+
+</svg>
