@@ -14,12 +14,18 @@ const instances = {
         "sharepic/templates/quote2/template.json",
         "sharepic/templates/quote3/template.json",
         "sharepic/templates/sentence2/template.json",
-        "sharepic/templates/countdown/template.json",
         "sharepic/templates/sentence3/template.json",
+        "sharepic/templates/countdown/template.json",
         "sharepic/templates/date-3/template.json",
         "sharepic/templates/alert/template.json",
         "sharepic/templates/drake/template.json",
-        "sharepic/templates/meme/template.json"
+        "sharepic/templates/meme/template.json",
+        "sharepic/templates/memehelper/template.json",
+        "sharepic/templates/3_parties/template.json",
+        "sharepic/templates/crumbled/template.json",
+        "sharepic/templates/boxes/template.json",
+        "sharepic/templates/rounded/template.json",
+
     ]
   },
   en: {
