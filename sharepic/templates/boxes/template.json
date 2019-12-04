@@ -140,15 +140,6 @@
       }
     },
     {
-      "type": "line",
-      "description": "Info Text",
-      "key": "info",
-      "default": "www.fridaysforfuture.de   #fridaysforfuture",
-      "properties": {
-
-      }
-    },
-    {
       "type": "selection",
       "description": "Logo",
       "key": "logo",
