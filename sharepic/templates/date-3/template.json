@@ -8,6 +8,12 @@
       "height": 1200,
       "src": "sharepic/templates/date-3/1200x1200.svg",
       "alias": "Facebook, Instagram"
+    },
+    {
+      "width": 1200,
+      "height": 675,
+      "src": "sharepic/templates/date-3/1200x675.svg",
+      "alias": "Twitter"
     }
   ],
   "fonts": [
