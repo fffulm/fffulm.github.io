@@ -20,12 +20,7 @@ const instances = {
         "sharepic/templates/alert/template.json",
         "sharepic/templates/drake/template.json",
         "sharepic/templates/meme/template.json",
-        "sharepic/templates/memehelper/template.json",
-        "sharepic/templates/3_parties/template.json",
-        "sharepic/templates/crumbled/template.json",
         "sharepic/templates/boxes/template.json",
-        "sharepic/templates/rounded/template.json",
-
     ]
   },
   en: {
