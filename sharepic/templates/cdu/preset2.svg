@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="100%" height="100%"
+     viewBox="0 0 1080 720"
+     version="1.1">
+
+    <g class="main">
+
+        <rect x="0" y="0" width="100%" height="100%" fill="#dad9d4"/>
+        <defs>
+            <rect id="schwarz" x="-720" v-bind:y="360-360/2 - (-350) * Math.cos(60/180*Math.PI)" width="2160" v-bind:height="360"
+                  v-bind:transform="'rotate(' + 60 + ', ' + (720-360/2+(-350)*Math.sin(60/180*Math.PI)) + ', 360)'"/>
+            <rect id="rot" x="-720" v-bind:y="360-360/2 - (-200) * Math.cos((-15)/180*Math.PI)" width="2160" v-bind:height="360"
+                  v-bind:transform="'rotate(' + (-15) + ', ' + (720-360/2+(-200)*Math.sin((-15)/180*Math.PI)) + ', 360)'"/>
+            <rect id="orange" x="-720" v-bind:y="360-360/2 - (-300) * Math.cos((-45)/180*Math.PI)" width="2160" v-bind:height="360" alignment-baseline="middle"
+                  v-bind:transform="'rotate(' + (-45) + ', ' + (720-360/2+(-300)*Math.sin((-45)/180*Math.PI)) + ', 360)'"/>
+            <mask id="rot-und-schwarz">
+                <use href="#rot" fill="black"/>
+                <use href="#schwarz" fill="white"/>
+            </mask>
+            <mask id="orange-und-schwarz">
+                <use href="#orange" fill="black"/>
+                <use href="#schwarz" fill="white"/>
+            </mask>
+            <mask id="orange-und-rot">
+                <use href="#orange" fill="black"/>
+                <use href="#rot" fill="white"/>
+            </mask>
+        </defs>
+        <use href="#schwarz" fill="#32302e"/>
+        <use href="#rot" fill="#ca080c"/>
+        <use href="#orange" fill="#ffd700"/>
+        <use href="#rot" fill="#8c1208" mask="url(#rot-und-schwarz)"/>
+        <use href="#orange" fill="#fab200" mask="url(#orange-und-schwarz)"/>
+        <use href="#orange" fill="#fab200" mask="url(#orange-und-rot)"/>
+
+        <g v-for="line_num in title.length">
+            <rect x="50" v-bind:y="357-70*1.25/6-6*(title.length-1)-title.length*70*0.625+(line_num-1)*(70*1.25+6)"
+                  v-bind:height="70*1.25"
+                  v-bind:width="textInfo(title[line_num-1], {fontFamily: 'Kievit', fontSize: 70+'px'}).width+40"
+                  fill="#fff"/>
+            <text x="65" v-bind:y="380-6*(title.length-1)-title.length*70*0.625+(line_num-1)*(70*1.25+6)+70*0.5-24"
+                  alignment-baseline="middle"
+                  v-bind:style="'transform-origin: 50% 17.5px; transform: scale(1); font-size: ' + 70 + 'px; font-family: &quot;Kievit&quot;, &quot;Helvetica Neue&quot;;'">
+                {{title[line_num-1]}}
+            </text>
+        </g>
+        <rect x="50" v-bind:y="364-13+70/1.9*title.length+title.length*5"
+              v-bind:width="textInfo(subtitle, {fontFamily: 'Kievit', fontSize: 70/3+'px'}).width+30"
+              v-bind:height="70/2.4"
+              fill="#000"/>
+        <text x="65" v-bind:y="364+70/1.9*title.length+70*0.3-16+title.length*5"
+              alignment-baseline="middle"
+              v-bind:style="'font-size: ' + 70/3 + 'px; font-family: &quot;Kievit&quot;, &quot;Helvetica Neue&quot;;'"
+              fill="#fff">
+            {{subtitle}}
+        </text>
+        <rect x="850" y="30" width="25%" height="12%" fill="#fff"/>
+
+        <text style="font-size: 80; font-family: 'Kievit_Black_Italic';" fill="#ed1c24" x="880" y="110">
+            {{logo_text}}
+        </text>
+        <g v-if="options[0]">
+            <image v-bind:xlink:href="typeof logo == 'object' ? logo.value : logo" x="895" y="535" height="160" width="160" />
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,171 @@
+{
+  "name": "CDU Wahlplakat",
+  "preview": "sharepic/templates/cdu/preview.jpg",
+  "documents": [
+    {
+      "width": 1080,
+      "height": 720,
+      "src": "sharepic/templates/cdu/document.svg",
+      "alias": "Dynamic"
+    }
+  ],
+  "fonts": [
+    {
+      "name": "Kievit",
+      "src": "fonts/Kievit_Medium.ttf",
+      "mime": "font/truetype"
+    },
+    {
+      "name": "Kievit_Black_Italic",
+      "src": "fonts/Kievit_Black_Italic.ttf",
+      "mime": "font/truetype"
+    }
+  ],
+  "fields": [
+    {
+      "type": "text",
+      "description": "Title",
+      "key": "title",
+      "default": ["Erfolgreich", "für mehr Klimaschutz."],
+      "properties": {
+
+      }
+    },
+    {
+      "type": "line",
+      "description": "Subtitle",
+      "key": "subtitle",
+      "default": "Am 29.11. mit Fridays for Future auf die Straße.",
+      "properties": {
+
+      }
+    },
+    {
+      "type": "line",
+      "description": "Logo",
+      "key": "logo",
+      "default": "FFF",
+      "properties": {
+
+      }},
+    {
+      "type": "number",
+      "description": "Breite Schwarz",
+      "key": "width_black",
+      "default": 600,
+      "properties": {
+        "value": 600,
+        "max": 2000,
+        "min": 1,
+        "kind": "slider"
+      }
+    },
+    {
+      "type": "number",
+      "description": "Rotation Schwarz",
+      "key": "rotation_black",
+      "default": 40,
+      "properties": {
+        "value": 40,
+        "max": 90,
+        "min": -90,
+        "kind": "slider"
+      }
+    },
+    {
+      "type": "number",
+      "description": "Position Schwarz",
+      "key": "position_black",
+      "default": -350,
+      "properties": {
+        "value": -350,
+        "max": 1000,
+        "min": -1000,
+        "kind": "slider"
+      }
+    },
+    {
+      "type": "number",
+      "description": "Breite Rot",
+      "key": "width_red",
+      "default": 360,
+      "properties": {
+        "value": 360,
+        "max": 2000,
+        "min": 1,
+        "kind": "slider"
+      }
+    },
+    {
+      "type": "number",
+      "description": "Rotation Rot",
+      "key": "rotation_red",
+      "default": -15,
+      "properties": {
+        "value": -15,
+        "max": 90,
+        "min": -90,
+        "kind": "slider"
+      }
+    },
+    {
+      "type": "number",
+      "description": "Position Rot",
+      "key": "position_red",
+      "default": 0,
+      "properties": {
+        "value": 0,
+        "max": 1000,
+        "min": -1000,
+        "kind": "slider"
+      }
+    },    {
+      "type": "number",
+      "description": "Breite Gold",
+      "key": "width_gold",
+      "default": 360,
+      "properties": {
+        "value": 360,
+        "max": 2000,
+        "min": 1,
+        "kind": "slider"
+      }
+    },
+    {
+      "type": "number",
+      "description": "Rotation Gold",
+      "key": "rotation_gold",
+      "default": -60,
+      "properties": {
+        "value": -60,
+        "max": 90,
+        "min": -90,
+        "kind": "slider"
+      }
+    },
+    {
+      "type": "number",
+      "description": "Position Gold",
+      "key": "position_gold",
+      "default": -50,
+      "properties": {
+        "value": -50,
+        "max": 1000,
+        "min": -1000,
+        "kind": "slider"
+      }
+    },
+    {
+      "type": "number",
+      "description": "Schriftgröße",
+      "key": "font_size",
+      "default": 70,
+      "properties": {
+        "value": 70,
+        "max": 120,
+        "min": 20,
+        "kind": "slider"
+      }
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "name": "Wahlplakat 1",
+  "preview": "sharepic/templates/cdu/preview.jpg",
+  "documents": [
+    {
+      "width": 1080,
+      "height": 720,
+      "src": "sharepic/templates/cdu/preset1.svg",
+      "alias": "Preset 1"
+    },
+    {
+      "width": 1080,
+      "height": 720,
+      "src": "sharepic/templates/cdu/preset2.svg",
+      "alias": "Preset 2"
+    }
+  ],
+  "fonts": [
+    {
+      "name": "Kievit",
+      "src": "fonts/Kievit_Medium.ttf",
+      "mime": "font/truetype"
+    },
+    {
+      "name": "Kievit_Black_Italic",
+      "src": "fonts/Kievit_Black_Italic.ttf",
+      "mime": "font/truetype"
+    }
+  ],
+  "fields": [
+    {
+      "type": "text",
+      "description": "Title",
+      "key": "title",
+      "default": ["Erfolgreich", "für mehr Klimaschutz."],
+      "properties": {
+
+      }
+    },
+    {
+      "type": "line",
+      "description": "Subtitle",
+      "key": "subtitle",
+      "default": "Am 29.11. mit Fridays for Future auf die Straße.",
+      "properties": {
+
+      }
+    },
+    {
+      "type": "line",
+      "description": "Logo",
+      "key": "logo_text",
+      "default": "FFF",
+      "properties": {
+
+      }
+    },
+    {
+      "type": "checklist",
+      "description": "Optionen",
+      "key": "options",
+      "default": [false],
+      "properties": {
+        "fields": [
+          "Logo"
+        ]
+      }
+    },
+    {
+      "type": "selection",
+      "description": "Logo",
+      "key": "logo",
+      "properties": {
+        "items": [
+          {
+            "type": "value",
+            "value": "sharepic/resources/logo.svg"
+          },
+          {
+            "type": "value",
+            "value": "sharepic/resources/logo-2.svg"
+          },
+          {
+            "type": "value",
+            "value": "sharepic/resources/logo-3.svg"
+          },
+          {
+            "type": "value",
+            "value": "sharepic/resources/logo-ulm.svg"
+          },
+          {
+            "type": "file"
+          }
+        ]
+      }
+    }
+  ]
+}

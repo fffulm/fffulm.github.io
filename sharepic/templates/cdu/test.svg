@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="100%" height="100%"
+     viewBox="0 0 1080 720"
+     version="1.1">
+
+    <g class="main">
+
+        <rect x="0" y="0" width="100%" height="100%" fill="#dad9d4"/>
+        <defs>
+            <rect id="schwarz" x="0" y="0" width="2160" height="360"
+                  transform="rotate(40) translate(0,50)"/>
+            <rect id="rot" x="0" y="0" width="2160" height="360"
+                  transform="rotate(-15) translate(-150,220)"/>
+            <rect id="orange" x="0" y="0" width="2160" height="360"
+                  transform="rotate(-55) translate(-500, 360)"/>
+            <mask id="rot-und-schwarz">
+                <use href="#rot" fill="black"/>
+                <use href="#schwarz" fill="white"/>
+            </mask>
+            <mask id="orange-und-schwarz">
+                <use href="#orange" fill="black"/>
+                <use href="#schwarz" fill="white"/>
+            </mask>
+            <mask id="orange-und-rot">
+                <use href="#orange" fill="black"/>
+                <use href="#rot" fill="white"/>
+            </mask>
+        </defs>
+        <use href="#schwarz" fill="#32302e"/>
+        <use href="#rot" fill="#ca080c"/>
+        <use href="#orange" fill="#ffd700"/>
+        <use href="#rot" fill="#8c1208" mask="url(#rot-und-schwarz)"/>
+        <use href="#orange" fill="#fab200" mask="url(#orange-und-schwarz)"/>
+        <use href="#orange" fill="#fab200" mask="url(#orange-und-rot)"/>
+
+        <rect x="600" y="30" width="25%" height="12%" fill="#fff"/>
+
+    </g>
+</svg>
