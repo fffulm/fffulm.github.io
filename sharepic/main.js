@@ -225,7 +225,7 @@ class PicCreator {
                   {
                     type: "click",
                     async callback(event) {
-                      var maxTries = !exportMethod.clientSide ? 0 : 5;
+                      var maxTries = !exportMethod.clientSide ? 0 : 1;
 
 
                       var tries = 1;
@@ -1297,36 +1297,6 @@ const Components = {
 
 const Export = [
   {
-    name: "PNG (Server)",
-    experimental: true,
-    clientSide: false,
-    convert(svg, templateUrl, data) {
-
-      return new Promise(async (resolve, reject) => {
-
-        const apiUrl = "https://api.lautfuersklima.de/proxy?http://195.201.36.188:65323/api/render?" + templateUrl;
-        console.log(apiUrl);
-
-        fetch(apiUrl, {
-          method: 'post',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(data._data)
-        }).then(async response => {
-          const blob = await response.blob();
-
-          const blobUrl = URL.createObjectURL(blob);
-
-          resolve(blobUrl);
-        });
-
-        //resolve(await Export[1].convert(svg))
-
-      });
-    }
-  },
-  {
     name: "PNG",
     clientSide: true,
     convert(svg) {
@@ -1339,34 +1309,65 @@ const Export = [
         c.height = viewBox[3];
         var ctx = c.getContext("2d");
 
-        //const img = document.createElement("img");
-        //const img = document.getElementById("draw-img");
         const img = new Image();
 
-        //img.width = c.width;
-        //img.height = c.height;
 
         img.src = 'data:image/svg+xml;base64,' + Base64.encode(svg.outerHTML);
-        //window.open(img.src);
+        const loadScreen = document.querySelector(".load-screen");
+
+        img.addEventListener("load", async function() {
+          ctx.drawImage(img, 0, 0);
+
+          const dataURL = c.toDataURL("image/png");
+          var element = document.createElement('a');
+          element.setAttribute('href', dataURL);
+          var d = new Date();
+          element.setAttribute('download', "Sharepic-" + d.toISOString() + ".png");
+          element.style.display = 'none';
+          document.body.appendChild(element);
+
+          element.click();
+
+          document.body.removeChild(element);
+          resolve(dataURL);
+        });
+      });
+    }
+  },
+  {
+    name: "JPG",
+    clientSide: true,
+    convert(svg) {
+      return new Promise(function(resolve, reject) {
+        const viewBox = svg.getAttribute("viewBox").split(" ").map(numberStr => parseInt(numberStr));
+
+        var c = document.getElementById("render-canvas");
+
+        c.width = viewBox[2];
+        c.height = viewBox[3];
+        var ctx = c.getContext("2d");
+
+        const img = new Image();
+
+
+        img.src = 'data:image/svg+xml;base64,' + Base64.encode(svg.outerHTML);
         const loadScreen = document.querySelector(".load-screen");
 
         img.addEventListener("load", function() {
           ctx.drawImage(img, 0, 0);
 
-          const dataURL = c.toDataURL("image/png");
+          const dataURL = c.toDataURL("image/jpeg");
+          var element = document.createElement('a');
+          element.setAttribute('href', dataURL);
+          var d = new Date();
+          element.setAttribute('download', "Sharepic-" + d.toISOString() + ".jpg");
+          element.style.display = 'none';
+          document.body.appendChild(element);
 
+          element.click();
+
+          document.body.removeChild(element);
           resolve(dataURL);
-
-          //loadScreen.classList.add("show");
-
-
-          /*setTimeout(function() {
-            const dataURL = c.toDataURL("image/png");
-
-            resolve(dataURL);
-
-            loadScreen.classList.remove("show");
-          }, 1000);*/
         });
       });
     }
@@ -1379,6 +1380,61 @@ const Export = [
         const dataURL = 'data:image/svg+xml;base64,' + Base64.encode(svg.outerHTML);
 
         resolve(dataURL);
+      });
+    }
+  },
+  {
+    name: "Drive (Beta)",
+    clientSide: true,
+    convert(svg) {
+      return new Promise(function(resolve, reject) {
+        const viewBox = svg.getAttribute("viewBox").split(" ").map(numberStr => parseInt(numberStr));
+
+        var c = document.getElementById("render-canvas");
+
+        c.width = viewBox[2];
+        c.height = viewBox[3];
+        var ctx = c.getContext("2d");
+
+        const img = new Image();
+
+
+        img.src = 'data:image/svg+xml;base64,' + Base64.encode(svg.outerHTML);
+        const loadScreen = document.querySelector(".load-screen");
+
+        img.addEventListener("load", async function() {
+          ctx.drawImage(img, 0, 0);
+
+          const dataURL = c.toDataURL("image/png");
+          var d = new Date();
+          const file_name = "Sharepic-" + d.toISOString() + ".png";
+
+          const password = document.cookie.replace(/(?:(?:^|.*;\s*)drivePassword\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+          var xhr = new XMLHttpRequest();
+          xhr.open("POST", "https://toolpic-backend-python.herokuapp.com/upload-image/", true);
+          // xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+          xhr.setRequestHeader('Content-Type', 'plain/text');
+          xhr.onreadystatechange = function () {
+            if (this.readyState != 4) return;
+            if (this.status==200) {
+              var snack = document.getElementById("snackbar");
+              snack.className = "show";
+              snack.innerText = "Image uploaded";
+              setTimeout(function(){ snack.className = snack.className.replace("show", "hidden"); }, 3000);
+            }else{
+              var snack = document.getElementById("snackbar");
+              snack.className = "show";
+              snack.innerText = "Error";
+              setTimeout(function(){ snack.className = snack.className.replace("show", "hidden"); }, 3000);
+            }
+          };
+          xhr.send(JSON.stringify({
+              data: dataURL.substring(22),
+              file_name: file_name,
+              password: password,
+          }));
+          //resolve(dataURL);
+        });
       });
     }
   }
