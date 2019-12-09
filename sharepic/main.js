@@ -1410,6 +1410,10 @@ const Export = [
           const file_name = "Sharepic-" + d.toISOString() + ".png";
 
           const password = document.cookie.replace(/(?:(?:^|.*;\s*)drivePassword\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+          var snack = document.getElementById("snackbar");
+          snack.className = "show";
+          snack.innerText = "Uploading...";
+          setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
           var xhr = new XMLHttpRequest();
           xhr.open("POST", "https://toolpic-backend-python.herokuapp.com/upload-image/", true);
           // xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
@@ -1420,12 +1424,12 @@ const Export = [
               var snack = document.getElementById("snackbar");
               snack.className = "show";
               snack.innerText = "Image uploaded";
-              setTimeout(function(){ snack.className = snack.className.replace("show", "hidden"); }, 3000);
+              setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
             }else{
               var snack = document.getElementById("snackbar");
               snack.className = "show";
               snack.innerText = "Error";
-              setTimeout(function(){ snack.className = snack.className.replace("show", "hidden"); }, 3000);
+              setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
             }
           };
           xhr.send(JSON.stringify({
