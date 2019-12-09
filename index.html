@@ -98,6 +98,16 @@
         <a href="https://github.com/MauriceConrad/Sharepicify" target="_blank">GitHub</a> |
         Bei Ideen für neue Toolpic Designes schickt eine E-Mail an
         <a href="mailto:janniknone@gmail.com" target="_blank">janniknone@gmail.com</a>
+        <input type="password" name="password" id="password">
+        <button type="button" onclick='
+          var x = document.getElementById("password");
+          document.cookie = "drivePassword="+x.value+"; expires=Fri, 31 Dec 9999 12:00:00 UTC";
+          x.value = "";
+          var snack = document.getElementById("snackbar");
+          snack.className = "show";
+          snack.innerText = "Password saved";
+          setTimeout(function(){ snack.className = snack.className.replace("show", "hidden"); }, 3000);'
+        >Save Password</button>
       </footer>
     </div>
 
@@ -321,7 +331,7 @@
         }
       }
     </script>
-
+  <div id="snackbar">Text</div>
   </body>
   <script src="js/app.js" charset="utf-8"></script>
 </html>
