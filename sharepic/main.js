@@ -151,10 +151,9 @@ class PicCreator {
           data: data,
           methods: {
             textInfo: PicCreator.textInfo,
-            imageSize: PicCreator.imageSize,
             textToMultilineFormat: PicCreator.textToMultilineFormat,
             textFitWidth: PicCreator.textFitWidth,
-            getDigits: PicCreator.getDigits,
+            getDigits: PicCreator.getDigits
           },
           directives: {
             dynamic: dynamicDirective,
@@ -441,16 +440,6 @@ class PicCreator {
         })
       ]
     })
-  }
-
-  static imageSize(path, debug = false) {
-    var img = new Image();
-    img.src = path;
-    const info = {
-      width: img.width,
-      height: img.height
-    };
-    return info;
   }
 
   static textInfo(str, style, debug = false) {
@@ -841,27 +830,6 @@ const Components = {
       })
     ]
   },
-  zeile(field, callback) {
-    field.properties = field.properties || {};
-
-    return [
-      PicCreator.createElement("input", {
-        attributes: {
-          type: "text",
-          value: field.default,
-          length: field.properties.length
-        },
-        eventListeners: [
-          {
-            type: "input",
-            callback(event) {
-              callback(this.value);
-            }
-          }
-        ]
-      })
-    ]
-  },
   chars(field, callback) {
     return [
       PicCreator.createElement("input", {
@@ -897,7 +865,7 @@ const Components = {
                   style: "background-image: url('" + ({
                     value: item.render || item.value,
                     file: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxzdmcgd2lkdGg9IjYwJSIgaGVpZ2h0PSI2MCUiIHk9IjIwJSIgeD0iMjAlIiB2aWV3Qm94PSIwIDAgMzE1LjU4IDMxNS41OCI+ICAgIAk8cGF0aCBmaWxsPSIjZmZmIiBkPSJNMzEwLjU4LDMzLjMzMUg1Yy0yLjc2MSwwLTUsMi4yMzgtNSw1djIzOC45MThjMCwyLjc2MiwyLjIzOSw1LDUsNWgzMDUuNThjMi43NjMsMCw1LTIuMjM4LDUtNVYzOC4zMzEgIAkJQzMxNS41OCwzNS41NjksMzEzLjM0MywzMy4zMzEsMzEwLjU4LDMzLjMzMXogTTI4NS41OCwyNDIuMzg2bC02OC43NjYtNzEuMjE0Yy0wLjc2LTAuNzg1LTIuMDAzLTAuODM2LTIuODIzLTAuMTE0bC00Ny42OTUsNDEuOTc5ICAJCWwtNjAuOTYyLTc1LjA2MWMtMC4zOTYtMC40OS0wLjk3NS0wLjc3LTEuNjMtMC43NTZjLTAuNjMxLDAuMDEzLTEuMjIsMC4zMTYtMS41OTcsMC44MjJMMzAsMjM0Ljc5N1Y2My4zMzFoMjU1LjU4VjI0Mi4zODZ6Ii8+ICAJPHBhdGggZD0iTTIxMC4wNTksMTM1LjU1NWMxMy41MzgsMCwyNC41MjktMTAuOTgyLDI0LjUyOS0yNC41MzFjMC0xMy41NDUtMTAuOTkxLTI0LjUzMy0yNC41MjktMjQuNTMzICAJCWMtMTMuNTQ5LDAtMjQuNTI4LDEwLjk4OC0yNC41MjgsMjQuNTMzQzE4NS41MzEsMTI0LjU3MiwxOTYuNTExLDEzNS41NTUsMjEwLjA1OSwxMzUuNTU1eiIgZmlsbD0iI2ZmZiIvPiAgICA8L3N2Zz48L3N2Zz4=",
-                    drive: "data:image/png;base64,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"
+                    drive: "data:image/png;base64,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"
                   })[item.type] + "')"
                 }
               })
@@ -952,8 +920,6 @@ const Components = {
                             view2.setMimeTypes("image/png,image/jpeg,image/jpg,image/svg+xml");
                             var uploadview = new google.picker.DocsUploadView();
                             var photoview = new google.picker.DocsView(google.picker.ViewId.PHOTOS);
-                            var imagesearch = new google.picker.ImageSearchView();
-                            imagesearch.setSize(google.picker.ImageSearchView.Size.SIZE_SVGA);
                             var picker = new google.picker.PickerBuilder()
                                 .enableFeature(google.picker.Feature.SUPPORT_DRIVES)
                                 .setAppId(appId)
@@ -961,7 +927,6 @@ const Components = {
                                 .addView(view)
                                 .addView(view2)
                                 .addView(photoview)
-                                .addView(imagesearch)
                                 .addView(uploadview)
                                 .setSelectableMimeTypes("image/png,image/jpeg,image/jpg,image/svg+xml")
                                 .setDeveloperKey(developerKey)
@@ -1424,24 +1389,20 @@ const Export = [
         c.height = viewBox[3];
         var ctx = c.getContext("2d");
 
-        //const img = document.createElement("img");
-        //const img = document.getElementById("draw-img");
         const img = new Image();
 
-        //img.width = c.width;
-        //img.height = c.height;
 
         img.src = 'data:image/svg+xml;base64,' + Base64.encode(svg.outerHTML);
-        //window.open(img.src);
         const loadScreen = document.querySelector(".load-screen");
 
-        img.addEventListener("load", function () {
+        img.addEventListener("load", async function () {
           ctx.drawImage(img, 0, 0);
-          console.log(c);
+
           const dataURL = c.toDataURL("image/png");
           var element = document.createElement('a');
           element.setAttribute('href', dataURL);
-          element.setAttribute('download', "Sharepic.png");
+          var d = new Date();
+          element.setAttribute('download', "Sharepic-" + d.toISOString() + ".png");
           element.style.display = 'none';
           document.body.appendChild(element);
 
@@ -1466,22 +1427,26 @@ const Export = [
         c.height = viewBox[3];
         var ctx = c.getContext("2d");
 
-        //const img = document.createElement("img");
-        //const img = document.getElementById("draw-img");
         const img = new Image();
 
-        //img.width = c.width;
-        //img.height = c.height;
 
         img.src = 'data:image/svg+xml;base64,' + Base64.encode(svg.outerHTML);
-        //window.open(img.src);
         const loadScreen = document.querySelector(".load-screen");
 
         img.addEventListener("load", function () {
           ctx.drawImage(img, 0, 0);
 
           const dataURL = c.toDataURL("image/jpeg");
+          var element = document.createElement('a');
+          element.setAttribute('href', dataURL);
+          var d = new Date();
+          element.setAttribute('download', "Sharepic-" + d.toISOString() + ".jpg");
+          element.style.display = 'none';
+          document.body.appendChild(element);
 
+          element.click();
+
+          document.body.removeChild(element);
           resolve(dataURL);
         });
       });
@@ -1495,6 +1460,71 @@ const Export = [
         const dataURL = 'data:image/svg+xml;base64,' + Base64.encode(svg.outerHTML);
 
         resolve(dataURL);
+      });
+    }
+  },
+  {
+    name: "Drive (Beta)",
+    clientSide: true,
+    convert(svg) {
+      return new Promise(function (resolve, reject) {
+        const viewBox = svg.getAttribute("viewBox").split(" ").map(numberStr => parseInt(numberStr));
+
+        var c = document.getElementById("render-canvas");
+
+        c.width = viewBox[2];
+        c.height = viewBox[3];
+        var ctx = c.getContext("2d");
+
+        const img = new Image();
+
+
+        img.src = 'data:image/svg+xml;base64,' + Base64.encode(svg.outerHTML);
+        const loadScreen = document.querySelector(".load-screen");
+
+        img.addEventListener("load", async function () {
+          ctx.drawImage(img, 0, 0);
+
+          const dataURL = c.toDataURL("image/png");
+          var d = new Date();
+          const file_name = "Sharepic-" + d.toISOString() + ".png";
+
+          const password = document.cookie.replace(/(?:(?:^|.*;\s*)drivePassword\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+          var snack = document.getElementById("snackbar");
+          snack.className = "show";
+          snack.innerText = "Uploading...";
+          setTimeout(function () {
+            snack.className = snack.className.replace("show", "");
+          }, 3000);
+          var xhr = new XMLHttpRequest();
+          xhr.open("POST", "https://toolpic-backend-python.herokuapp.com/upload-image/", true);
+          // xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+          xhr.setRequestHeader('Content-Type', 'plain/text');
+          xhr.onreadystatechange = function () {
+            if (this.readyState != 4) return;
+            if (this.status == 200) {
+              var snack = document.getElementById("snackbar");
+              snack.className = "show";
+              snack.innerText = "Image uploaded";
+              setTimeout(function () {
+                snack.className = snack.className.replace("show", "");
+              }, 3000);
+            } else {
+              var snack = document.getElementById("snackbar");
+              snack.className = "show";
+              snack.innerText = "Error";
+              setTimeout(function () {
+                snack.className = snack.className.replace("show", "");
+              }, 3000);
+            }
+          };
+          xhr.send(JSON.stringify({
+            data: dataURL.substring(22),
+            file_name: file_name,
+            password: password,
+          }));
+          //resolve(dataURL);
+        });
       });
     }
   }
