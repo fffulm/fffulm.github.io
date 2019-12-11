@@ -151,9 +151,10 @@ class PicCreator {
           data: data,
           methods: {
             textInfo: PicCreator.textInfo,
+            imageSize: PicCreator.imageSize,
             textToMultilineFormat: PicCreator.textToMultilineFormat,
             textFitWidth: PicCreator.textFitWidth,
-            getDigits: PicCreator.getDigits
+            getDigits: PicCreator.getDigits,
           },
           directives: {
             dynamic: dynamicDirective,
@@ -440,6 +441,16 @@ class PicCreator {
         })
       ]
     })
+  }
+
+  static imageSize(path, debug = false) {
+    var img = new Image();
+    img.src = path;
+    const info = {
+      width: img.width,
+      height: img.height
+    };
+    return info;
   }
 
   static textInfo(str, style, debug = false) {
@@ -810,6 +821,27 @@ const Components = {
     ];
   },
   line(field, callback) {
+    field.properties = field.properties || {};
+
+    return [
+      PicCreator.createElement("input", {
+        attributes: {
+          type: "text",
+          value: field.default,
+          length: field.properties.length
+        },
+        eventListeners: [
+          {
+            type: "input",
+            callback(event) {
+              callback(this.value);
+            }
+          }
+        ]
+      })
+    ]
+  },
+  zeile(field, callback) {
     field.properties = field.properties || {};
 
     return [
@@ -1392,20 +1424,24 @@ const Export = [
         c.height = viewBox[3];
         var ctx = c.getContext("2d");
 
+        //const img = document.createElement("img");
+        //const img = document.getElementById("draw-img");
         const img = new Image();
 
+        //img.width = c.width;
+        //img.height = c.height;
 
         img.src = 'data:image/svg+xml;base64,' + Base64.encode(svg.outerHTML);
+        //window.open(img.src);
         const loadScreen = document.querySelector(".load-screen");
 
-        img.addEventListener("load", async function () {
+        img.addEventListener("load", function () {
           ctx.drawImage(img, 0, 0);
-
+          console.log(c);
           const dataURL = c.toDataURL("image/png");
           var element = document.createElement('a');
           element.setAttribute('href', dataURL);
-          var d = new Date();
-          element.setAttribute('download', "Sharepic-" + d.toISOString() + ".png");
+          element.setAttribute('download', "Sharepic.png");
           element.style.display = 'none';
           document.body.appendChild(element);
 
@@ -1430,26 +1466,22 @@ const Export = [
         c.height = viewBox[3];
         var ctx = c.getContext("2d");
 
+        //const img = document.createElement("img");
+        //const img = document.getElementById("draw-img");
         const img = new Image();
 
+        //img.width = c.width;
+        //img.height = c.height;
 
         img.src = 'data:image/svg+xml;base64,' + Base64.encode(svg.outerHTML);
+        //window.open(img.src);
         const loadScreen = document.querySelector(".load-screen");
 
         img.addEventListener("load", function () {
           ctx.drawImage(img, 0, 0);
 
           const dataURL = c.toDataURL("image/jpeg");
-          var element = document.createElement('a');
-          element.setAttribute('href', dataURL);
-          var d = new Date();
-          element.setAttribute('download', "Sharepic-" + d.toISOString() + ".jpg");
-          element.style.display = 'none';
-          document.body.appendChild(element);
 
-          element.click();
-
-          document.body.removeChild(element);
           resolve(dataURL);
         });
       });
@@ -1463,71 +1495,6 @@ const Export = [
         const dataURL = 'data:image/svg+xml;base64,' + Base64.encode(svg.outerHTML);
 
         resolve(dataURL);
-      });
-    }
-  },
-  {
-    name: "Drive (Beta)",
-    clientSide: true,
-    convert(svg) {
-      return new Promise(function (resolve, reject) {
-        const viewBox = svg.getAttribute("viewBox").split(" ").map(numberStr => parseInt(numberStr));
-
-        var c = document.getElementById("render-canvas");
-
-        c.width = viewBox[2];
-        c.height = viewBox[3];
-        var ctx = c.getContext("2d");
-
-        const img = new Image();
-
-
-        img.src = 'data:image/svg+xml;base64,' + Base64.encode(svg.outerHTML);
-        const loadScreen = document.querySelector(".load-screen");
-
-        img.addEventListener("load", async function () {
-          ctx.drawImage(img, 0, 0);
-
-          const dataURL = c.toDataURL("image/png");
-          var d = new Date();
-          const file_name = "Sharepic-" + d.toISOString() + ".png";
-
-          const password = document.cookie.replace(/(?:(?:^|.*;\s*)drivePassword\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-          var snack = document.getElementById("snackbar");
-          snack.className = "show";
-          snack.innerText = "Uploading...";
-          setTimeout(function () {
-            snack.className = snack.className.replace("show", "");
-          }, 3000);
-          var xhr = new XMLHttpRequest();
-          xhr.open("POST", "https://toolpic-backend-python.herokuapp.com/upload-image/", true);
-          // xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
-          xhr.setRequestHeader('Content-Type', 'plain/text');
-          xhr.onreadystatechange = function () {
-            if (this.readyState != 4) return;
-            if (this.status == 200) {
-              var snack = document.getElementById("snackbar");
-              snack.className = "show";
-              snack.innerText = "Image uploaded";
-              setTimeout(function () {
-                snack.className = snack.className.replace("show", "");
-              }, 3000);
-            } else {
-              var snack = document.getElementById("snackbar");
-              snack.className = "show";
-              snack.innerText = "Error";
-              setTimeout(function () {
-                snack.className = snack.className.replace("show", "");
-              }, 3000);
-            }
-          };
-          xhr.send(JSON.stringify({
-            data: dataURL.substring(22),
-            file_name: file_name,
-            password: password,
-          }));
-          //resolve(dataURL);
-        });
       });
     }
   }
