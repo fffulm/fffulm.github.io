@@ -1,7 +1,8 @@
 const experimental = Boolean(localStorage.experimental);
 
 class PicCreator {
-  constructor(selector, template, exportRender = function() {}, startFormatIndex = 0) {
+  constructor(selector, template, exportRender = function () {
+  }, startFormatIndex = 0) {
     const self = this;
 
     this.e = document.querySelector(selector);
@@ -61,7 +62,6 @@ class PicCreator {
       }));
 
 
-
       // Rendering a SVG document
       const renderDoc = async (docUrl) => {
 
@@ -85,8 +85,8 @@ class PicCreator {
 
             return `
               @font-face {
-                font-family: "${ fontObj.name }";
-                src: url("${ dataURL }");
+                font-family: "${fontObj.name}";
+                src: url("${dataURL}");
               }
             `;
           });
@@ -109,7 +109,6 @@ class PicCreator {
           `;
 
           this.previewSVG.append(hiddenArea);
-
 
 
           // Debug
@@ -141,9 +140,7 @@ class PicCreator {
             };
 
 
-
           });
-
 
 
         })();
@@ -188,19 +185,17 @@ class PicCreator {
       for (let field of this.template.fields) {
         try {
           data[field.key] = "default" in field ? field.default : field.properties.items[0].value;
-        }
-        catch (e) {
+        } catch (e) {
 
         }
 
 
-
-        const settingLi = PicCreator.createSetting(field, function(value) {
+        const settingLi = PicCreator.createSetting(field, function (value) {
           // Value return
 
           dataController[field.key] = value;
 
-          setTimeout(function() {
+          setTimeout(function () {
             self.replaceURLsWithData();
           }, 500);
 
@@ -219,7 +214,7 @@ class PicCreator {
           }),
           PicCreator.createElement("div", {
             className: "controls",
-            childs: Export.filter(exportMethod => Boolean(exportMethod.experimental) ? experimental : true).map(function(exportMethod) {
+            childs: Export.filter(exportMethod => Boolean(exportMethod.experimental) ? experimental : true).map(function (exportMethod) {
               return PicCreator.createElement("button", {
                 eventListeners: [
                   {
@@ -229,9 +224,9 @@ class PicCreator {
 
 
                       var tries = 1;
-                      const tryer = setInterval(async function() {
+                      const tryer = setInterval(async function () {
 
-                        (async function() {
+                        (async function () {
                           const result = await exportMethod.convert(self.previewContainer.getElementsByTagName("svg")[0], template.root + "?" + currFormatIndex, dataController);
                           exportRender(result);
                         })();
@@ -286,6 +281,7 @@ class PicCreator {
                 return unitHandlers[originPosObj.unit](originPosObj.value);
               }
             }
+
             // Object describing the absolute pixels of the element's origin
             const origin = {
               x: bounding.x + originToAbsolutePx(originRelative[0]),
@@ -319,12 +315,11 @@ class PicCreator {
           });
 
 
-
         }
       }
 
       const fitImageDirective = {
-        inserted: async function(el, binding) {
+        inserted: async function (el, binding) {
 
           el.setAttributeNS(null, "width", "100%");
           el.setAttributeNS(null, "height", "100%");
@@ -332,7 +327,7 @@ class PicCreator {
           fitImageDirective.update(el, binding);
 
         },
-        update: async function(el, binding) {
+        update: async function (el, binding) {
 
           const svgRoot = el.closest("svg");
           const viewBox = svgRoot.getAttribute("viewBox").split(" ").map(numberStr => parseInt(numberStr));
@@ -340,7 +335,6 @@ class PicCreator {
           const size = Math.max(width, height);
 
           const viewBoxRatio = width / height;
-
 
 
           // Get current src attribute value of image element
@@ -380,16 +374,11 @@ class PicCreator {
       };
 
 
-
-
-
     })();
 
 
-
-
-
   }
+
   async replaceURLsWithData() {
 
     const images = getElementByMethod(this.previewMain, e => {
@@ -418,19 +407,24 @@ class PicCreator {
   get toolsList() {
     return this.e.getElementsByClassName("tools")[0].getElementsByTagName("ul")[0];
   }
+
   get previewContainer() {
     return this.e.getElementsByClassName("preview")[0];
   }
+
   get previewSVG() {
     return this.previewContainer.getElementsByTagName("svg")[0];
   }
+
   get previewMain() {
     return this.previewSVG.getElementsByClassName("main")[0];
   }
+
   loadTools() {
 
 
   }
+
   static createSetting(field, callback) {
     return PicCreator.createElement("li", {
       childs: [
@@ -447,6 +441,7 @@ class PicCreator {
       ]
     })
   }
+
   static textInfo(str, style, debug = false) {
 
     //return getTextWidth(str, style);
@@ -456,8 +451,7 @@ class PicCreator {
     if (typeof style == "object") {
       text.style.fontFamily = style.fontFamily;
       text.style.fontSize = style.fontSize;
-    }
-    else {
+    } else {
       text.style = style;
     }
     text.classList.add("test-text");
@@ -480,6 +474,7 @@ class PicCreator {
 
     return info;
   }
+
   static textToMultilineFormat(text, targetFormat = 1, charsPerLine = 0.4, correctWay = false) {
 
     const chars = text.split("");
@@ -528,10 +523,7 @@ class PicCreator {
 
 
       return closestWrap.lines;
-    }
-
-
-    else {
+    } else {
       const bestWrap = dividers.map(wrapBorder => {
 
         const linesAmount = Math.round(chars.length / wrapBorder);
@@ -560,8 +552,8 @@ class PicCreator {
     }
 
 
-
   }
+
   static getDigits(number) {
 
     if (!number) {
@@ -588,8 +580,9 @@ class PicCreator {
       index: 0
     }];
   }
+
   static imageInfo(url) {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
 
       loadImage(url, function (img, data) {
 
@@ -608,6 +601,7 @@ class PicCreator {
 
     });
   }
+
   static createElement(tagName, options, inner) {
     if (typeof options === "string") options = {
       className: options
@@ -630,8 +624,7 @@ class PicCreator {
     for (var i = 0; i < options.childs.length; i++) {
       if (typeof options.childs[i] == "string") {
         e.innerHTML += options.childs[i];
-      }
-      else {
+      } else {
         e.appendChild(options.childs[i]);
       }
     }
@@ -669,16 +662,17 @@ class PicCreator {
   }
 
 }
+
 PicCreator.templates = {};
 
 
 function get(url, type = null) {
 
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     const xhr = new XMLHttpRequest();
     xhr.responseType = type;
     xhr.open("GET", url, true);
-    xhr.addEventListener("load", function() {
+    xhr.addEventListener("load", function () {
       resolve(this.response);
     });
     xhr.send();
@@ -686,11 +680,11 @@ function get(url, type = null) {
 }
 
 function request(url, type) {
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     const xhr = new XMLHttpRequest();
     xhr.responseType = type;
     xhr.open("GET", url, true);
-    xhr.addEventListener("load", function() {
+    xhr.addEventListener("load", function () {
       resolve({
         response: this.response,
         headers: this.getAllResponseHeaders()
@@ -699,8 +693,6 @@ function request(url, type) {
     xhr.send();
   });
 }
-
-
 
 
 const Components = {
@@ -728,7 +720,7 @@ const Components = {
               const file = event.target.files[0];
 
               const reader = new FileReader();
-              reader.addEventListener("load", async function(event) {
+              reader.addEventListener("load", async function (event) {
                 const dataURL = event.target.result;
                 //callback({});
 
@@ -808,7 +800,7 @@ const Components = {
       ]
     }, field.default.join("\n"));
 
-    setTimeout(function() {
+    setTimeout(function () {
       const initInputEvent = new Event('input');
       textarea.dispatchEvent(initInputEvent);
     }, 500);
@@ -872,7 +864,8 @@ const Components = {
                 attributes: {
                   style: "background-image: url('" + ({
                     value: item.render || item.value,
-                    file: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxzdmcgd2lkdGg9IjYwJSIgaGVpZ2h0PSI2MCUiIHk9IjIwJSIgeD0iMjAlIiB2aWV3Qm94PSIwIDAgMzE1LjU4IDMxNS41OCI+ICAgIAk8cGF0aCBmaWxsPSIjZmZmIiBkPSJNMzEwLjU4LDMzLjMzMUg1Yy0yLjc2MSwwLTUsMi4yMzgtNSw1djIzOC45MThjMCwyLjc2MiwyLjIzOSw1LDUsNWgzMDUuNThjMi43NjMsMCw1LTIuMjM4LDUtNVYzOC4zMzEgIAkJQzMxNS41OCwzNS41NjksMzEzLjM0MywzMy4zMzEsMzEwLjU4LDMzLjMzMXogTTI4NS41OCwyNDIuMzg2bC02OC43NjYtNzEuMjE0Yy0wLjc2LTAuNzg1LTIuMDAzLTAuODM2LTIuODIzLTAuMTE0bC00Ny42OTUsNDEuOTc5ICAJCWwtNjAuOTYyLTc1LjA2MWMtMC4zOTYtMC40OS0wLjk3NS0wLjc3LTEuNjMtMC43NTZjLTAuNjMxLDAuMDEzLTEuMjIsMC4zMTYtMS41OTcsMC44MjJMMzAsMjM0Ljc5N1Y2My4zMzFoMjU1LjU4VjI0Mi4zODZ6Ii8+ICAJPHBhdGggZD0iTTIxMC4wNTksMTM1LjU1NWMxMy41MzgsMCwyNC41MjktMTAuOTgyLDI0LjUyOS0yNC41MzFjMC0xMy41NDUtMTAuOTkxLTI0LjUzMy0yNC41MjktMjQuNTMzICAJCWMtMTMuNTQ5LDAtMjQuNTI4LDEwLjk4OC0yNC41MjgsMjQuNTMzQzE4NS41MzEsMTI0LjU3MiwxOTYuNTExLDEzNS41NTUsMjEwLjA1OSwxMzUuNTU1eiIgZmlsbD0iI2ZmZiIvPiAgICA8L3N2Zz48L3N2Zz4="
+                    file: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxzdmcgd2lkdGg9IjYwJSIgaGVpZ2h0PSI2MCUiIHk9IjIwJSIgeD0iMjAlIiB2aWV3Qm94PSIwIDAgMzE1LjU4IDMxNS41OCI+ICAgIAk8cGF0aCBmaWxsPSIjZmZmIiBkPSJNMzEwLjU4LDMzLjMzMUg1Yy0yLjc2MSwwLTUsMi4yMzgtNSw1djIzOC45MThjMCwyLjc2MiwyLjIzOSw1LDUsNWgzMDUuNThjMi43NjMsMCw1LTIuMjM4LDUtNVYzOC4zMzEgIAkJQzMxNS41OCwzNS41NjksMzEzLjM0MywzMy4zMzEsMzEwLjU4LDMzLjMzMXogTTI4NS41OCwyNDIuMzg2bC02OC43NjYtNzEuMjE0Yy0wLjc2LTAuNzg1LTIuMDAzLTAuODM2LTIuODIzLTAuMTE0bC00Ny42OTUsNDEuOTc5ICAJCWwtNjAuOTYyLTc1LjA2MWMtMC4zOTYtMC40OS0wLjk3NS0wLjc3LTEuNjMtMC43NTZjLTAuNjMxLDAuMDEzLTEuMjIsMC4zMTYtMS41OTcsMC44MjJMMzAsMjM0Ljc5N1Y2My4zMzFoMjU1LjU4VjI0Mi4zODZ6Ii8+ICAJPHBhdGggZD0iTTIxMC4wNTksMTM1LjU1NWMxMy41MzgsMCwyNC41MjktMTAuOTgyLDI0LjUyOS0yNC41MzFjMC0xMy41NDUtMTAuOTkxLTI0LjUzMy0yNC41MjktMjQuNTMzICAJCWMtMTMuNTQ5LDAtMjQuNTI4LDEwLjk4OC0yNC41MjgsMjQuNTMzQzE4NS41MzEsMTI0LjU3MiwxOTYuNTExLDEzNS41NTUsMjEwLjA1OSwxMzUuNTU1eiIgZmlsbD0iI2ZmZiIvPiAgICA8L3N2Zz48L3N2Zz4=",
+                    drive: "data:image/png;base64,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"
                   })[item.type] + "')"
                 }
               })
@@ -885,13 +878,109 @@ const Components = {
 
                   const typeHandlers = {
                     value() {
-                      return new Promise(function(resolve, reject) {
+                      return new Promise(function (resolve, reject) {
                         resolve(self.item.value);
 
                       });
                     },
+                    drive() {
+                      return new Promise(function (resolve, reject) {
+                        var developerKey = 'AIzaSyAxIoiPHS7kgCx2VAH1I3V02X2hAQO9lNg';
+                        var clientId = "203055278160-34v5m4gbtfq87rmukuuidlj1vcniph4c.apps.googleusercontent.com";
+                        var appId = "203055278160";
+
+                        var scope = ['https://www.googleapis.com/auth/drive.file'];
+
+                        function onAuthApiLoad() {
+                          window.gapi.auth.authorize(
+                              {
+                                'client_id': clientId,
+                                'scope': scope,
+                                'immediate': false
+                              },
+                              handleAuthResult);
+                        }
+
+                        function handleAuthResult(authResult) {
+                          if (authResult && !authResult.error) {
+                            const oauthToken = authResult.access_token;
+                            document.cookie = "GoogleoauthToken=" + oauthToken + ";Max-Age=3600;";
+                            createPicker();
+                          }
+                        }
+
+                        function createPicker() {
+                          const oauthToken = document.cookie.replace(/(?:(?:^|.*;\s*)GoogleoauthToken\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+                          if (oauthToken) {
+                            var view = new google.picker.DocsView(google.picker.ViewId.DOCS_IMAGES);
+                            view.setMimeTypes("image/png,image/jpeg,image/jpg,image/svg+xml");
+                            var view2 = new google.picker.DocsView(google.picker.ViewId.DOCS_IMAGES);
+                            view2.setParent("root");
+                            view2.setIncludeFolders(true);
+                            view2.setMimeTypes("image/png,image/jpeg,image/jpg,image/svg+xml");
+                            var uploadview = new google.picker.DocsUploadView();
+                            var photoview = new google.picker.DocsView(google.picker.ViewId.PHOTOS);
+                            var imagesearch = new google.picker.ImageSearchView();
+                            imagesearch.setSize(google.picker.ImageSearchView.Size.SIZE_SVGA);
+                            var picker = new google.picker.PickerBuilder()
+                                .enableFeature(google.picker.Feature.SUPPORT_DRIVES)
+                                .setAppId(appId)
+                                .setOAuthToken(oauthToken)
+                                .addView(view)
+                                .addView(view2)
+                                .addView(photoview)
+                                .addView(imagesearch)
+                                .addView(uploadview)
+                                .setSelectableMimeTypes("image/png,image/jpeg,image/jpg,image/svg+xml")
+                                .setDeveloperKey(developerKey)
+                                .setCallback(pickerCallback)
+                                .build();
+                            picker.setVisible(true);
+                          }
+                        }
+
+                        function pickerCallback(data) {
+                          if (data.action == google.picker.Action.PICKED) {
+                            var fileId = data.docs[0].id;
+                            console.log(data);
+                            const url = "https://www.googleapis.com/drive/v2/files/" + fileId + "?alt=media";
+                            const oauthToken = document.cookie.replace(/(?:(?:^|.*;\s*)GoogleoauthToken\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+                            var xhr = new XMLHttpRequest();
+                            xhr.open('GET', url);
+                            xhr.setRequestHeader('Authorization', 'Bearer ' + oauthToken);
+                            xhr.responseType = "blob";
+                            xhr.onreadystatechange = function () {
+                              if (this.readyState != 4) return;
+                              if (this.status == 200) {
+                                var reader = new FileReader();
+                                reader.readAsDataURL(this.response);
+                                reader.onloadend = async function () {
+                                  var dataURL = reader.result;
+                                  const imgInfo = await PicCreator.imageInfo(dataURL);
+                                  resolve({
+                                    info: imgInfo,
+                                    type: "dataURL",
+                                    value: imgInfo.data
+                                  });
+                                }
+                              }
+                            };
+                            xhr.send();
+                          }
+                        }
+
+
+                        const oauthToken = document.cookie.replace(/(?:(?:^|.*;\s*)GoogleoauthToken\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+                        if (!oauthToken) {
+                          gapi.load('auth', {'callback': onAuthApiLoad});
+                        }
+                        gapi.load('picker', {'callback': createPicker});
+
+
+                      });
+                    },
                     file() {
-                      return new Promise(function(resolve, reject) {
+                      return new Promise(function (resolve, reject) {
                         //const fileInput = document.createElement("input");
                         const fileInput = document.querySelector("#hidden-file-input");
                         //fileInput.type = "file";
@@ -900,14 +989,14 @@ const Components = {
                         //alert(fileInput);
 
 
-                        fileInput.addEventListener("change", function(event) {
+                        fileInput.addEventListener("change", function (event) {
 
                           const file = event.target.files[0];
                           //console.log(file);
                           //alert(file);
 
                           const reader = new FileReader();
-                          reader.addEventListener("load", async function(event) {
+                          reader.addEventListener("load", async function (event) {
                             const dataURL = event.target.result;
 
                             //console.log(dataURL.length);
@@ -926,13 +1015,14 @@ const Components = {
                           });
 
                           reader.readAsDataURL(file);
-                        })
+                        });
 
                         fileInput.click();
 
                       });
-                    }
-                  }
+                    },
+
+                  };
 
                   const result = await typeHandlers[item.type]();
 
@@ -974,9 +1064,7 @@ const Components = {
                   }
                 ]
               }),
-              PicCreator.createElement("span", {
-
-              }, checkItem)
+              PicCreator.createElement("span", {}, checkItem)
             ]
           })
         })
@@ -1052,7 +1140,6 @@ const Components = {
       map.getSource('points').setData(pointsData);
 
     }
-
 
 
     const btns = PicCreator.createElement("div", {
@@ -1206,7 +1293,7 @@ const Components = {
     });
 
 
-    setTimeout(function() {
+    setTimeout(function () {
 
       map = new mapboxgl.Map({
         container: mapContainer,
@@ -1217,7 +1304,7 @@ const Components = {
 
       map.getCanvas().style.cursor = 'crosshair';
 
-      map.on('click', function(e) {
+      map.on('click', function (e) {
 
 
         /*route.push({
@@ -1234,9 +1321,7 @@ const Components = {
       });
 
 
-
-
-      map.on("load", function() {
+      map.on("load", function () {
 
         map.addSource('route', {
           type: 'geojson',
@@ -1278,8 +1363,6 @@ const Components = {
         });
 
 
-
-
       });
     }, 100);
 
@@ -1300,7 +1383,7 @@ const Export = [
     name: "PNG",
     clientSide: true,
     convert(svg) {
-      return new Promise(function(resolve, reject) {
+      return new Promise(function (resolve, reject) {
         const viewBox = svg.getAttribute("viewBox").split(" ").map(numberStr => parseInt(numberStr));
 
         var c = document.getElementById("render-canvas");
@@ -1315,7 +1398,7 @@ const Export = [
         img.src = 'data:image/svg+xml;base64,' + Base64.encode(svg.outerHTML);
         const loadScreen = document.querySelector(".load-screen");
 
-        img.addEventListener("load", async function() {
+        img.addEventListener("load", async function () {
           ctx.drawImage(img, 0, 0);
 
           const dataURL = c.toDataURL("image/png");
@@ -1338,7 +1421,7 @@ const Export = [
     name: "JPG",
     clientSide: true,
     convert(svg) {
-      return new Promise(function(resolve, reject) {
+      return new Promise(function (resolve, reject) {
         const viewBox = svg.getAttribute("viewBox").split(" ").map(numberStr => parseInt(numberStr));
 
         var c = document.getElementById("render-canvas");
@@ -1353,7 +1436,7 @@ const Export = [
         img.src = 'data:image/svg+xml;base64,' + Base64.encode(svg.outerHTML);
         const loadScreen = document.querySelector(".load-screen");
 
-        img.addEventListener("load", function() {
+        img.addEventListener("load", function () {
           ctx.drawImage(img, 0, 0);
 
           const dataURL = c.toDataURL("image/jpeg");
@@ -1376,7 +1459,7 @@ const Export = [
     name: "SVG",
     clientSide: true,
     convert(svg) {
-      return new Promise(function(resolve, reject) {
+      return new Promise(function (resolve, reject) {
         const dataURL = 'data:image/svg+xml;base64,' + Base64.encode(svg.outerHTML);
 
         resolve(dataURL);
@@ -1387,7 +1470,7 @@ const Export = [
     name: "Drive (Beta)",
     clientSide: true,
     convert(svg) {
-      return new Promise(function(resolve, reject) {
+      return new Promise(function (resolve, reject) {
         const viewBox = svg.getAttribute("viewBox").split(" ").map(numberStr => parseInt(numberStr));
 
         var c = document.getElementById("render-canvas");
@@ -1402,7 +1485,7 @@ const Export = [
         img.src = 'data:image/svg+xml;base64,' + Base64.encode(svg.outerHTML);
         const loadScreen = document.querySelector(".load-screen");
 
-        img.addEventListener("load", async function() {
+        img.addEventListener("load", async function () {
           ctx.drawImage(img, 0, 0);
 
           const dataURL = c.toDataURL("image/png");
@@ -1413,29 +1496,35 @@ const Export = [
           var snack = document.getElementById("snackbar");
           snack.className = "show";
           snack.innerText = "Uploading...";
-          setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
+          setTimeout(function () {
+            snack.className = snack.className.replace("show", "");
+          }, 3000);
           var xhr = new XMLHttpRequest();
           xhr.open("POST", "https://toolpic-backend-python.herokuapp.com/upload-image/", true);
           // xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
           xhr.setRequestHeader('Content-Type', 'plain/text');
           xhr.onreadystatechange = function () {
             if (this.readyState != 4) return;
-            if (this.status==200) {
+            if (this.status == 200) {
               var snack = document.getElementById("snackbar");
               snack.className = "show";
               snack.innerText = "Image uploaded";
-              setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
-            }else{
+              setTimeout(function () {
+                snack.className = snack.className.replace("show", "");
+              }, 3000);
+            } else {
               var snack = document.getElementById("snackbar");
               snack.className = "show";
               snack.innerText = "Error";
-              setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
+              setTimeout(function () {
+                snack.className = snack.className.replace("show", "");
+              }, 3000);
             }
           };
           xhr.send(JSON.stringify({
-              data: dataURL.substring(22),
-              file_name: file_name,
-              password: password,
+            data: dataURL.substring(22),
+            file_name: file_name,
+            password: password,
           }));
           //resolve(dataURL);
         });
@@ -1446,7 +1535,7 @@ const Export = [
 
 Vue.component('multiline-text', {
   props: ['x', 'y', 'text', 'padding', 'lineheight', 'background', 'css', 'verticalalign', 'align'],
-  data: function() {
+  data: function () {
     return {
       a: 100
     };
@@ -1511,7 +1600,6 @@ Vue.component('multiline-text', {
       const lineHeight = Number(this.lineheight || 1.1);
 
 
-
       const totalHeight = (rectHeight * lineHeight) * this.text.length;
 
 
@@ -1523,7 +1611,6 @@ Vue.component('multiline-text', {
         };
 
         const yPos = y + (rectSize.height * lineHeight) * index;
-
 
 
         return {
@@ -1554,21 +1641,107 @@ Vue.component('multiline-text', {
 
 
 function getTextWidth(text, font) {
-    // re-use canvas object for better performance
-    var canvas = getTextWidth.canvas || (getTextWidth.canvas = document.createElement("canvas"));
-    var context = canvas.getContext("2d");
-    context.font = font;
-    var metrics = context.measureText(text);
-    return metrics.width;
+  // re-use canvas object for better performance
+  var canvas = getTextWidth.canvas || (getTextWidth.canvas = document.createElement("canvas"));
+  var context = canvas.getContext("2d");
+  context.font = font;
+  var metrics = context.measureText(text);
+  return metrics.width;
 }
 
 
 // Create Base64 Object
-const Base64 = {_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){var t="";var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f<e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n>>2;o=(n&3)<<4|r>>4;u=(r&15)<<2|i>>6;a=i&63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t="";var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9\+\/\=]/g,"");while(f<e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s<<2|o>>4;r=(o&15)<<4|u>>2;i=(u&3)<<6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/\r\n/g,"\n");var t="";for(var n=0;n<e.length;n++){var r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r)}else if(r>127&&r<2048){t+=String.fromCharCode(r>>6|192);t+=String.fromCharCode(r&63|128)}else{t+=String.fromCharCode(r>>12|224);t+=String.fromCharCode(r>>6&63|128);t+=String.fromCharCode(r&63|128)}}return t},_utf8_decode:function(e){var t="";var n=0;var r=c1=c2=0;while(n<e.length){r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r);n++}else if(r>191&&r<224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&31)<<6|c2&63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&15)<<12|(c2&63)<<6|c3&63);n+=3}}return t}}
+const Base64 = {
+  _keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=", encode: function (e) {
+    var t = "";
+    var n, r, i, s, o, u, a;
+    var f = 0;
+    e = Base64._utf8_encode(e);
+    while (f < e.length) {
+      n = e.charCodeAt(f++);
+      r = e.charCodeAt(f++);
+      i = e.charCodeAt(f++);
+      s = n >> 2;
+      o = (n & 3) << 4 | r >> 4;
+      u = (r & 15) << 2 | i >> 6;
+      a = i & 63;
+      if (isNaN(r)) {
+        u = a = 64
+      } else if (isNaN(i)) {
+        a = 64
+      }
+      t = t + this._keyStr.charAt(s) + this._keyStr.charAt(o) + this._keyStr.charAt(u) + this._keyStr.charAt(a)
+    }
+    return t
+  }, decode: function (e) {
+    var t = "";
+    var n, r, i;
+    var s, o, u, a;
+    var f = 0;
+    e = e.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+    while (f < e.length) {
+      s = this._keyStr.indexOf(e.charAt(f++));
+      o = this._keyStr.indexOf(e.charAt(f++));
+      u = this._keyStr.indexOf(e.charAt(f++));
+      a = this._keyStr.indexOf(e.charAt(f++));
+      n = s << 2 | o >> 4;
+      r = (o & 15) << 4 | u >> 2;
+      i = (u & 3) << 6 | a;
+      t = t + String.fromCharCode(n);
+      if (u != 64) {
+        t = t + String.fromCharCode(r)
+      }
+      if (a != 64) {
+        t = t + String.fromCharCode(i)
+      }
+    }
+    t = Base64._utf8_decode(t);
+    return t
+  }, _utf8_encode: function (e) {
+    e = e.replace(/\r\n/g, "\n");
+    var t = "";
+    for (var n = 0; n < e.length; n++) {
+      var r = e.charCodeAt(n);
+      if (r < 128) {
+        t += String.fromCharCode(r)
+      } else if (r > 127 && r < 2048) {
+        t += String.fromCharCode(r >> 6 | 192);
+        t += String.fromCharCode(r & 63 | 128)
+      } else {
+        t += String.fromCharCode(r >> 12 | 224);
+        t += String.fromCharCode(r >> 6 & 63 | 128);
+        t += String.fromCharCode(r & 63 | 128)
+      }
+    }
+    return t
+  }, _utf8_decode: function (e) {
+    var t = "";
+    var n = 0;
+    var r = c1 = c2 = 0;
+    while (n < e.length) {
+      r = e.charCodeAt(n);
+      if (r < 128) {
+        t += String.fromCharCode(r);
+        n++
+      } else if (r > 191 && r < 224) {
+        c2 = e.charCodeAt(n + 1);
+        t += String.fromCharCode((r & 31) << 6 | c2 & 63);
+        n += 2
+      } else {
+        c2 = e.charCodeAt(n + 1);
+        c3 = e.charCodeAt(n + 2);
+        t += String.fromCharCode((r & 15) << 12 | (c2 & 63) << 6 | c3 & 63);
+        n += 3
+      }
+    }
+    return t
+  }
+}
 
 
 function getElementByMethod(e, handler) {
   const results = [];
+
   function loop(e) {
     for (let child of e.children) {
       if (handler(child)) {
@@ -1577,11 +1750,12 @@ function getElementByMethod(e, handler) {
       loop(child);
     }
   }
+
   loop(e);
   return results;
 }
 
-function Uint8ToBase64(u8Arr){
+function Uint8ToBase64(u8Arr) {
   var CHUNK_SIZE = 0x8000; //arbitrary number
   var index = 0;
   var length = u8Arr.length;
@@ -1631,7 +1805,7 @@ function parsePathData(dataStr) {
 
 function matchAll(str, rgx) {
   var arr, extras, matches = [];
-  str.replace(rgx.global ? rgx : new RegExp(rgx.source, (rgx + '').replace(/[\s\S]+\//g , 'g')), function(i) {
+  str.replace(rgx.global ? rgx : new RegExp(rgx.source, (rgx + '').replace(/[\s\S]+\//g, 'g')), function (i) {
     matches.push(arr = [].slice.call(arguments));
     extras = arr.splice(-2);
     arr.index = extras[0];
@@ -1641,35 +1815,36 @@ function matchAll(str, rgx) {
 }
 
 
-
 function wordWrap(str, maxWidth) {
   function testWhite(x) {
     var white = new RegExp(/^\s$/);
     return white.test(x.charAt(0));
-};
+  };
 
 
-    var newLineStr = "\n"; done = false; res = '';
-    do {
-        found = false;
-        // Inserts new line at first whitespace of the line
-        for (i = maxWidth - 1; i >= 0; i--) {
-            if (testWhite(str.charAt(i))) {
-                res = res + [str.slice(0, i), newLineStr].join('');
-                str = str.slice(i + 1);
-                found = true;
-                break;
-            }
-        }
-        // Inserts new line at maxWidth position, the word is too long to wrap
-        if (!found) {
-            res += [str.slice(0, maxWidth), newLineStr].join('');
-            str = str.slice(maxWidth);
-        }
+  var newLineStr = "\n";
+  done = false;
+  res = '';
+  do {
+    found = false;
+    // Inserts new line at first whitespace of the line
+    for (i = maxWidth - 1; i >= 0; i--) {
+      if (testWhite(str.charAt(i))) {
+        res = res + [str.slice(0, i), newLineStr].join('');
+        str = str.slice(i + 1);
+        found = true;
+        break;
+      }
+    }
+    // Inserts new line at maxWidth position, the word is too long to wrap
+    if (!found) {
+      res += [str.slice(0, maxWidth), newLineStr].join('');
+      str = str.slice(maxWidth);
+    }
 
-        if (str.length < maxWidth)
-            done = true;
-    } while (!done);
+    if (str.length < maxWidth)
+      done = true;
+  } while (!done);
 
-    return res + str;
+  return res + str;
 }
