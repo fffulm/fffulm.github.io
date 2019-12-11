@@ -54,6 +54,9 @@
       "properties": {
         "items": [
           {
+            "type": "drive"
+          },
+          {
             "type": "file"
           }
         ]
@@ -160,6 +163,9 @@
           {
             "type": "value",
             "value": "sharepic/resources/logo-3.svg"
+          },
+          {
+            "type": "drive"
           },
           {
             "type": "file"

@@ -89,6 +89,9 @@
             "value": "sharepic/resources/logo-ulm.svg"
           },
           {
+            "type": "drive"
+          },
+          {
             "type": "file"
           }
         ]

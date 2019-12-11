@@ -108,6 +108,9 @@
             "value": "sharepic/resources/logo-2.svg"
           },
           {
+            "type": "drive"
+          },
+          {
             "type": "file"
           }
         ]
