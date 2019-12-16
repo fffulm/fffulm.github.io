@@ -22,6 +22,7 @@ const instances = {
         "sharepic/templates/meme/template.json",
         "sharepic/templates/boxes/template.json",
         "sharepic/templates/cdu/template.json",
+        "sharepic/templates/stripes/template.json"
     ]
   },
   en: {
