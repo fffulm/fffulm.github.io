@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="100%" height="100%"
+     viewBox="0 0 1370 1200"
+     version="1.1">
+
+
+
+  <g class="main">
+    <!--<image v-bind:xlink:href="backgroundImage.value" v-bind:x="(backgroundImage.info.ratio >= 1 ? -((backgroundImage.info.ratio - 1) * pos) : 0) + '%'" v-bind:y="(backgroundImage.info.ratio < 1 ? -(((1 / backgroundImage.info.ratio) - 1) * pos) : 0) + '%'" v-bind:height="(backgroundImage.info.ratio < 1 ? ((1 / backgroundImage.info.ratio) * 100) : 100) + '%'" v-bind:width="(backgroundImage.info.ratio >= 1 ? (backgroundImage.info.ratio * 100) : 100) + '%'" />
+-->
+    <image v-bind:xlink:href="'https://toolpic-backend-python.herokuapp.com/warming-values/?lat='+lat+'&lon='+lon" v-fitimage v-bind:data-image-pos="pos" style="transform-origin: 50% 50%;" />
+    <rect fill="#000" opacity="0.5" x="20" y="1000" width="760" height="180"/>
+    <text y="1060" x="30" font-size="40" font-family="Jost" fill="#fff">Quelle: DWD Climate Data Center (CDC) </text>
+    <text y="1110" x="30" font-size="30" font-family="Jost" fill="#fff">Jahresmittel der Raster der monatlich gemittelten </text>
+    <text y="1150" x="30" font-size="30" font-family="Jost" fill="#fff">Lufttemperatur (2m) für Deutschland, Version v1.0. </text>
+    <rect fill="#000" opacity="0.5" x="100" y="50" width="1170" height="230"/>
+    <text y="140" x="685" font-size="78" font-family="Jost" fill="#fff" text-anchor="middle">Warming Stripes für {{ort}}</text>
+    <text y="240" x="685" font-size="78" font-family="Jost" fill="#fff" text-anchor="middle">1881 - 2017</text>
+
+    <filter id="dropshadow" height="130%">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="7"/> <!-- stdDeviation is how much to blur -->
+        <feOffset dx="7" dy="7" result="offsetblur"/> <!-- how much to offset -->
+        <feComponentTransfer>
+          <feFuncA type="linear" slope="0.6"/> <!-- slope is the opacity of the shadow -->
+        </feComponentTransfer>
+        <feMerge>
+          <feMergeNode/> <!-- this contains the offset blurred image -->
+          <feMergeNode in="SourceGraphic"/> <!-- this contains the element that the filter is applied to -->
+        </feMerge>
+      </filter>
+
+    <image v-bind:xlink:href="typeof logo == 'object' ? logo.value : logo" x="950" y="775" height="400" width="400" filter="url(#dropshadow)" />
+
+
+
+
+  </g>
+
+</svg>
