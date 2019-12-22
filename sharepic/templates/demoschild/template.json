@@ -1,0 +1,144 @@
+{
+  "name": "Demoschild",
+  "root": "https://toolpic.fridaysforfuture.de/sharepic/templates/demoschild/template.json",
+  "preview": "sharepic/templates/demoschild/preview.jpg",
+  "documents": [
+    {
+      "width": 1200,
+      "height": 1200,
+      "src": "sharepic/templates/demoschild/1200x1200.svg",
+      "alias": "Facebook, Instagram"
+    }
+  ],
+  "fonts": [
+    {
+      "name": "Jost",
+      "src": "fonts/Jost/Jost-600-Semi.ttf",
+      "mime": "font/truetype"
+    },
+    {
+      "name": "Jost-400",
+      "src": "fonts/Jost/Jost-400-Book.ttf",
+      "mime": "font/truetype"
+    },
+    {
+      "name": "Jost-300",
+      "src": "fonts/Jost/Jost-300-Light.ttf",
+      "mime": "font/truetype"
+    },
+    {
+      "name": "Jost-700",
+      "src": "fonts/Jost/Jost-700-Bold.ttf",
+      "mime": "font/truetype"
+    },
+    {
+      "name": "Jost-500",
+      "src": "fonts/Jost/Jost-500-Medium.ttf",
+      "mime": "font/truetype"
+    },
+    {
+      "name": "Brushot",
+      "src": "fonts/Brushot-Bold.ttf",
+      "mime": "font/truetype"
+    }
+  ],
+  "fields": [
+    {
+      "type": "selection",
+      "description": "Background",
+      "key": "backgroundImage",
+      "default": {
+        "value": "sharepic/templates/demoschild/bg.jpg"
+      },
+      "properties": {
+        "items": [
+          {
+            "type": "drive"
+          },
+          {
+            "type": "file"
+          }
+        ]
+      }
+    },
+    {
+      "type": "number",
+      "description": "Position",
+      "key": "pos",
+      "default": 0,
+      "properties": {
+        "value": 0,
+        "max": 1,
+        "min": -1,
+        "step": 0.05,
+        "kind": "slider"
+      }
+    },
+    {
+      "type": "line",
+      "description": "Title",
+      "key": "title",
+      "default": "präsentiert",
+      "properties": {
+
+      }
+    },
+    {
+      "type": "line",
+      "description": "Date",
+      "key": "date",
+      "default": "29. November",
+      "properties": {
+
+      }
+    },
+    {
+      "type": "line",
+      "description": "Location",
+      "key": "location",
+      "default": "Marktplatz Ulm",
+      "properties": {
+
+      }
+    },
+    {
+      "type": "checklist",
+      "description": "Optionen",
+      "key": "options",
+      "default": [true, true],
+      "properties": {
+        "fields": [
+          "Schild Overlay",
+          "Datum und Uhrzeit"
+        ]
+      }
+    },
+    {
+      "type": "selection",
+      "description": "Logo",
+      "key": "logo",
+      "properties": {
+        "items": [
+          {
+            "type": "value",
+            "value": "sharepic/resources/logo-ulm.svg"
+          },
+          {
+            "type": "value",
+            "value": "sharepic/resources/logo.svg"
+          },
+          {
+            "type": "value",
+            "value": "sharepic/resources/logo-2.svg"
+          },
+          {
+            "type": "drive"
+          },
+          {
+            "type": "file"
+          }
+        ]
+      }
+    }
+  ]
+}
