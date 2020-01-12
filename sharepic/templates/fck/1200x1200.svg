@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="100%" height="100%"
+     viewBox="0 0 1200 1200"
+     version="1.1">
+
+
+    <g class="main">
+        <rect fill="#000" width="100%" height="100%"/>
+        <rect fill="#f00" width="1000" height="100" x="100" y="30"/>
+        <rect fill="#f00" width="1000" height="100" x="100" y="1070"/>
+        <g v-bind:transform="'scale('+ 900/textInfo(line1, { fontFamily: 'Jost', fontSize: '450px'}).width +',1)'"
+           style="transform-origin: 600px 650px">
+            <text x="600" y="550" fill="#fff" font-size="450" font-family="Jost" text-anchor="middle">{{line1}}</text>
+
+        </g>
+        <g v-bind:transform="'scale('+ 900/textInfo(line2, { fontFamily: 'Jost', fontSize: '450px'}).width +',1)'"
+           style="transform-origin: 600px 650px">
+            <text x="600" y="650" fill="#fff" font-size="450" font-family="Jost" text-anchor="middle"
+                  alignment-baseline="hanging">{{line2}}
+            </text>
+        </g>
+    </g>
+
+</svg>
