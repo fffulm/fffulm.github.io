@@ -10,6 +10,7 @@ const instances = {
   de: {
     icon: "icons/germany.svg",
     templates: [
+        "sharepic/templates/fck/template.json",
         "sharepic/templates/retrospective/template.json",
         "sharepic/templates/quote2/template.json",
         "sharepic/templates/quote3/template.json",
