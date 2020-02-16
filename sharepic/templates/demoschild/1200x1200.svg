@@ -8,32 +8,34 @@
 
   <g class="main">
 
-
     <image v-if="typeof backgroundImage == 'object'" v-bind:xlink:href="backgroundImage.value" v-fitimage v-bind:data-image-pos="pos" style="transform-origin: 50% 50%;" />
-        <path d="M 0,1100 L 1200,1100 1200,1200 0,1200z" fill="#1B7340"/>
+
+        <path d="M 0,1100 L 1200,1100 1200,1200 0,1200 z" fill="#1B7340"/>
+
       <path d="M 0,1000 L 1200,1100 0,1100 z" fill="#1DA64A"/>
       <path d="M 0,0 L 10,0 120,1010 0,1000 z" fill="#57BC78"/>
-      <rect x="395" y="25" width="900" height="115" fill="#000" transform="rotate(4)"/>
-      <rect x="400" y="20" width="900" height="115" fill="#1DA64A" transform="rotate(4)"/>
-      <text x="800" y="80" transform="rotate(4)" alignment-baseline="middle" text-anchor="middle" style="font-family: 'Jost-700'; font-size: 75px; fill: #FFF;">{{title}}</text>
-        <!--<rect x="-20" y="100" height="50" width="200"  fill="#000" transform="rotate(-6)"/>-->
+      <rect x="395" y="25" width="900" v-bind:height="40+title.length*75+(title.length-1)*15" fill="#000" transform="rotate(4)"/>
+      <rect x="400" y="20" width="900" v-bind:height="40+title.length*75+(title.length-1)*15" fill="#1DA64A" transform="rotate(4)"/>
+      <g v-for="line in title.length">
+        <text x="800" v-bind:y="80+(line-1)*90" transform="rotate(4)" alignment-baseline="middle" text-anchor="middle" style="font-family: 'Jost-700'; font-size: 75px; fill: #FFF;">{{title[line-1]}}</text>
+</g>
       <g v-if="options[0]">
     <image xlink:href="sharepic/templates/demoschild/sign.png" x="-20" y="860" height="500" width="500" />
         </g>
       <filter id="dropshadow" height="130%">
-        <feGaussianBlur in="SourceAlpha" stdDeviation="7"/> <!-- stdDeviation is how much to blur -->
-        <feOffset dx="7" dy="7" result="offsetblur"/> <!-- how much to offset -->
+        <feGaussianBlur in="SourceAlpha" stdDeviation="7"/>
+        <feOffset dx="7" dy="7" result="offsetblur"/>
         <feComponentTransfer>
-          <feFuncA type="linear" slope="0.6"/> <!-- slope is the opacity of the shadow -->
+          <feFuncA type="linear" slope="0.6"/>
         </feComponentTransfer>
         <feMerge>
-          <feMergeNode/> <!-- this contains the offset blurred image -->
-          <feMergeNode in="SourceGraphic"/> <!-- this contains the element that the filter is applied to -->
+          <feMergeNode/>
+          <feMergeNode in="SourceGraphic"/>
         </feMerge>
       </filter>
     <image v-bind:xlink:href="typeof logo == 'object' ? logo.value : logo" x="15" y="15" height="320" width="320" filter="url(#dropshadow)" />
       <g v-if="options[1]">
-      <rect x="870" y="1103" height="94" v-bind:width="Math.max(textInfo(date, { fontFamily: 'Jost', fontSize: '40px'}).width, textInfo(location, { fontFamily: 'Jost', fontSize: '40px'}).width)+15" fill="#fff" fill-opacity="0.2" rx="5"/>
+      <rect x="870" y="1103" height="94" v-bind:width="Math.max(textInfo(date, { fontFamily: 'Jost-500', fontSize: '40px'}).width, textInfo(location, { fontFamily: 'Jost-500', fontSize: '40px'}).width)+15" fill="#fff" fill-opacity="0.2" rx="5"/>
       <text x="880" y="1132" alignment-baseline="middle" style="font-family: 'Jost-500'; font-size: 40px; fill: #FFF;">{{date}}</text>
       <text x="880" y="1175" alignment-baseline="middle" style="font-family: 'Jost-500'; font-size: 40px; fill: #FFF;">{{location}}</text>
         </g>
