@@ -48,7 +48,7 @@
       "description": "Background",
       "key": "backgroundImage",
       "default": {
-        "value": "sharepic/templates/demoschild/bg.jpg"
+        "value": "sharepic/templates/demoschild/bg-min.jpg"
       },
       "properties": {
         "items": [
@@ -75,10 +75,10 @@
       }
     },
     {
-      "type": "line",
+      "type": "text",
       "description": "Title",
       "key": "title",
-      "default": "präsentiert",
+      "default": ["präsentiert"],
       "properties": {
 
       }
