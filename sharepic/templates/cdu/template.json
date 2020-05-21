@@ -74,6 +74,10 @@
         "items": [
           {
             "type": "value",
+            "value": "sharepic/resources/logo-ulm-2.svg"
+          },
+          {
+            "type": "value",
             "value": "sharepic/resources/logo.svg"
           },
           {
