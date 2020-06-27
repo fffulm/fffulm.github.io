@@ -1,0 +1,142 @@
+{
+  "name": "Sidebar",
+  "root": "https://toolpic.fridaysforfuture.de/sharepic/templates/Sidebar/template.json",
+  "preview": "sharepic/templates/Sidebar/preview.jpg",
+  "documents": [
+    {
+      "width": 1500,
+      "height": 1500,
+      "src": "sharepic/templates/Sidebar/1200x1200.svg",
+      "alias": "Facebook, Instagram"
+    }
+  ],
+  "fonts": [
+    {
+      "name": "Jost",
+      "src": "fonts/Jost/Jost-600-Semi.ttf",
+      "mime": "font/truetype"
+    },
+    {
+      "name": "Jost-400",
+      "src": "fonts/Jost/Jost-400-Book.ttf",
+      "mime": "font/truetype"
+    },
+    {
+      "name": "Jost-300",
+      "src": "fonts/Jost/Jost-300-Light.ttf",
+      "mime": "font/truetype"
+    },
+    {
+      "name": "Jost-700",
+      "src": "fonts/Jost/Jost-700-Bold.ttf",
+      "mime": "font/truetype"
+    },
+    {
+      "name": "Jost-500",
+      "src": "fonts/Jost/Jost-500-Medium.ttf",
+      "mime": "font/truetype"
+    }
+  ],
+  "fields": [
+    {
+      "type": "selection",
+      "description": "Background",
+      "key": "backgroundImage",
+      "default": {
+        "value": "sharepic/templates/Sidebar/bg.jpg"
+      },
+      "properties": {
+        "items": [
+          {
+            "type": "drive"
+          },
+          {
+            "type": "file"
+          }
+        ]
+      }
+    },
+    {
+      "type": "number",
+      "description": "Position",
+      "key": "pos",
+      "default": 0,
+      "properties": {
+        "value": 0,
+        "max": 1,
+        "min": -1,
+        "step": 0.05,
+        "kind": "slider"
+      }
+    },
+    {
+      "type": "checklist",
+      "description": "Optionen",
+      "key": "options",
+      "default": [true, true],
+      "properties": {
+        "fields": [
+          "abgedunkelt",
+          "wechselnde Farben"
+        ]
+      }
+    },
+    {
+      "type": "text",
+      "description": "Title",
+      "key": "title",
+      "default": ["WIR", "STREIKEN", "BIS IHR", "HANDELT!"]
+    },
+    {
+      "type": "line",
+      "description": "Button",
+      "key": "button",
+      "default": "WICHTIG",
+      "properties": {
+
+      }
+    },
+        {
+      "type": "line",
+      "description": "Header",
+      "key": "header",
+      "default": "Nächste Demo:",
+      "properties": {
+
+      }
+    },
+        {
+      "type": "text",
+      "description": "Text",
+      "key": "text",
+      "default": ["26. Juni - 16 Uhr", "Münsterplatz Ulm"]
+    },
+    {
+      "type": "selection",
+      "description": "Logo",
+      "key": "logo",
+      "properties": {
+        "items": [
+          {
+            "type": "value",
+            "value": "sharepic/resources/fff_logo-ulmneuulm.png"
+          },
+          {
+            "type": "value",
+            "value": "sharepic/resources/logo.svg"
+          },
+          {
+            "type": "value",
+            "value": "sharepic/resources/logo-2.svg"
+          },
+          {
+            "type": "drive"
+          },
+          {
+            "type": "file"
+          }
+        ]
+      }
+    }
+  ]
+}

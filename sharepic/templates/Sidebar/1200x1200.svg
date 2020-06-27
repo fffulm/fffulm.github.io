@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+
+     viewBox="0 0 1500 1500"
+     version="1.1">
+
+
+
+  <g class="main">
+              <image v-bind:xlink:href="backgroundImage.value" v-fitimage v-bind:data-image-pos="pos" style="transform-origin: 50% 50%;" />
+    <g clip-path="url(#clip0)">
+<rect width="1500" height="1500" fill="url(#pattern0)"/>
+        <g v-if="options[0]">
+<rect width="1500" height="1500" fill="black" fill-opacity="0.09"/>
+        </g>
+<g filter="url(#filter0_d)">
+<path d="M0 0H1500V200H889.349C835.403 200 788.708 237.497 777.061 290.171L618 1009.5L0 1007.5V0Z" fill="#3B3B3B"/>
+<path d="M0 0H1500V200H889.349C835.403 200 788.708 237.497 777.061 290.171L618 1009.5L0 1007.5V0Z" fill="url(#paint0_linear)"/>
+</g>
+    <g v-for="n in title.length">
+        <text v-bind:x="330" v-bind:y="382 + 154 * n - 75*title.length" alignment-baseline="hanging" text-anchor="middle" v-bind:fill="n%2 || !options[1] ? '#FFF' : '#89FFB0'" style="font-size: 106px; font-family: 'Jost-700', 'Helvetica Neue';" >{{title[n-1]}}</text>
+      </g>
+<path d="M-13 1009.5H728.243C781.229 1009.5 827.357 1045.7 839.949 1097.17L938.5 1500H0L-13 1009.5Z" fill="white"/>
+                <text x="27" y="1118" alignment-baseline="hanging" fill="#000" style="font-size: 92px; font-family: 'Jost-700', 'Helvetica Neue';" >{{header}}</text>
+<rect x="73" y="952" width="472" height="115" rx="57.5" fill="#FEC229"/>
+        <g v-for="n in text.length">
+                      <text x="27" v-bind:y="1128 + 121*n" alignment-baseline="hanging" fill="#000" style="font-size: 82px; font-family: 'Jost-500', 'Helvetica Neue';" >{{text[n-1]}}</text>
+        </g>
+<rect x="73" y="952" width="472" height="115" rx="57.5" fill="#FEC229"/>
+                <text x="309" y="988" alignment-baseline="hanging" text-anchor="middle" fill="#000" style="font-size: 63px; font-family: 'Jost-700', 'Helvetica Neue';" >{{button}}</text>
+<g filter="url(#filter1_d)">
+<rect x="1085" y="43" width="353" height="351" fill="url(#pattern1)"/>
+</g>
+</g>
+    <defs>
+<pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+<use xlink:href="#image0" transform="translate(-0.25) scale(0.00192308)"/>
+</pattern>
+<filter id="filter0_d" x="-18" y="-18" width="1536" height="1045.5" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+<feOffset/>
+<feGaussianBlur stdDeviation="9"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+</filter>
+<filter id="filter1_d" x="885" y="-157" width="753" height="751" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+<feOffset/>
+<feGaussianBlur stdDeviation="100"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+</filter>
+<pattern id="pattern1" patternContentUnits="objectBoundingBox" width="1" height="1">
+<use xlink:href="#image1" transform="translate(0 -0.00120571) scale(0.00163399)"/>
+</pattern>
+<linearGradient id="paint0_linear" x1="597.5" y1="549.5" x2="-105.5" y2="-100.5" gradientUnits="userSpaceOnUse">
+<stop stop-color="#0EB553" stop-opacity="0.23"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</linearGradient>
+        <image id="image1" width="612" height="610" v-bind:xlink:href="typeof logo == 'object' ? logo.value : logo"/>
+        <clipPath id="clip0">
+<rect width="1500" height="1500" fill="white"/>
+</clipPath>
+        <image v-bind:xlink:href="backgroundImage.value" v-fitimage v-bind:data-image-pos="pos" style="transform-origin: 50% 50%;" />
+</defs>
+
+  </g>
+
+
+</svg>
