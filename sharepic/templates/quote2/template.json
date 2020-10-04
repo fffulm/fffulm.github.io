@@ -7,7 +7,13 @@
       "width": 1200,
       "height": 1200,
       "src": "sharepic/templates/quote2/1200x1200.svg",
-      "alias": "Facebook, Instagram"
+      "alias": "quote2"
+    },
+        {
+      "width": 1200,
+      "height": 1200,
+      "src": "sharepic/templates/quote2/quote3.svg",
+      "alias": "quote3"
     }
   ],
   "fonts": [
@@ -80,10 +86,6 @@
       "key": "logo",
       "properties": {
         "items": [
-          {
-            "type": "value",
-            "value": "sharepic/resources/logo-ulm-2.svg"
-          },
           {
             "type": "value",
             "value": "sharepic/resources/logo-ulm.svg"
