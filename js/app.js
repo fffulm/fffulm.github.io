@@ -17,7 +17,7 @@ const instances = {
         "sharepic/templates/quote2/template.json",
         //"sharepic/templates/quote3/template.json",
         "sharepic/templates/sentence2/template.json",
-        "sharepic/templates/sentence3/template.json",
+        //"sharepic/templates/sentence3/template.json",
         //"sharepic/templates/countdown/template.json",
         "sharepic/templates/date-3/template.json",
         "sharepic/templates/alert/template.json",
