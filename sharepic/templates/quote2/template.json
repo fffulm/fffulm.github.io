@@ -66,6 +66,17 @@
       }
     },
     {
+      "type": "checklist",
+      "description": "Effekte",
+      "key": "effects",
+      "default": [true],
+      "properties": {
+        "fields": [
+          "Verdunkelt"
+        ]
+      }
+    },
+    {
       "type": "text",
       "description": "Title",
       "key": "title",
